@@ -205,7 +205,7 @@ def get_char_width(widget):
         widget.get_pango_context().get_metrics().get_approximate_char_width())
 
 
-def pandoc_convert(text, to="html5", args=[], outputfile=None):
-    fr = Settings.new().get_value('input-format').get_string() or "markdown"
+def pandoc_convert(text, to="html5", args=[], outputfile=None, format_ext=""):
+    fmt = (Settings.new().get_value('input-format').get_string() or "markdown") + format_ext
     args.extend(["--quiet"])
-    return pypandoc.convert_text(text, to, fr, extra_args=args, outputfile=outputfile)
+    return pypandoc.convert_text(text, to, fmt, extra_args=args, outputfile=outputfile)
